@@ -17,7 +17,7 @@ App to show current leagues and scorers tables from football competitions writte
 
 * Application receives JSON from football-data.org and do deserialization into Java Objects. 
 
-## Screenshots
+## Screenshot
 
 ### Tables
 
