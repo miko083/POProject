@@ -5,6 +5,8 @@ import football.leagueTable.LeagueTable;
 import football.match.MatchesAllSeason;
 import football.scoresTable.ScorersTable;
 import football.team.TeamsInSeason;
+import gui.GUILeagueTable;
+import gui.GUIScorersTable;
 
 public class FootballSeason {
     private MatchesAllSeason matchesAllSeason;
@@ -12,11 +14,16 @@ public class FootballSeason {
     private ScorersTable scorersTable;
     private LeagueTable leagueTable;
 
-    public FootballSeason(String competitionID) {
+    private GUILeagueTable guiLeagueTable;
+    private GUIScorersTable guiScorersTable;
+
+    public FootballSeason(String competitionID, String nameOfCountry) {
         this.matchesAllSeason = JsonImport.importMatchesFPM(competitionID);
         this.teams = JsonImport.importTemsinSeason(competitionID);
         this.scorersTable = JsonImport.importScoreTable(competitionID);
         this.leagueTable = JsonImport.importLeagueTable(competitionID);
+        this.guiLeagueTable = new GUILeagueTable(nameOfCountry + " Table", leagueTable, teams );
+        this.guiScorersTable = new GUIScorersTable(nameOfCountry + "Table", scorersTable );
     }
 
     public void showInfo() {
@@ -45,6 +52,11 @@ public class FootballSeason {
 
     public LeagueTable getLeagueTable() {
         return leagueTable;
+    }
+
+    public void setVisible(){
+        guiLeagueTable.setVisible(true);
+        guiScorersTable.setVisible(true);
     }
 
 
