@@ -23,7 +23,7 @@ public class FootballSeason {
         this.scorersTable = JsonImport.importScoreTable(competitionID);
         this.leagueTable = JsonImport.importLeagueTable(competitionID);
         this.guiLeagueTable = new GUILeagueTable(nameOfCountry + " Table", leagueTable, teams );
-        this.guiScorersTable = new GUIScorersTable(nameOfCountry + "Table", scorersTable );
+        this.guiScorersTable = new GUIScorersTable(nameOfCountry + " Scorers", scorersTable );
     }
 
     public void showInfo() {
