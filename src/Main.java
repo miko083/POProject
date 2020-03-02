@@ -2,22 +2,20 @@ import com.google.gson.JsonSyntaxException;
 import football.*;
 import gui.*;
 
+import java.util.ArrayList;
+
 public class Main {
     public static void main(String[] args) {
         try {
-            FootballSeason englandSeason = new FootballSeason("2021");
-            FootballSeason italySeason = new FootballSeason("2019");
+            ArrayList<FootballSeason> footballSeasons = new ArrayList<>(2);
+            footballSeasons.add(new FootballSeason("2021", "England"));
+            footballSeasons.add(new FootballSeason("2019", "Italy"));
 
-            GUILeagueTable englandTable = new GUILeagueTable("England Table", englandSeason);
-            englandTable.setVisible(true);
-            GUIScorersTable englandScorers = new GUIScorersTable("England Scorers", englandSeason);
-            englandScorers.setVisible(true);
-
-            GUILeagueTable italyTable = new GUILeagueTable("Italy Table", italySeason);
-            italyTable.setVisible(true);
-            GUIScorersTable italyScorers = new GUIScorersTable("Italy Scorers", italySeason);
-            italyScorers.setVisible(true);
+            for (FootballSeason footballSeason : footballSeasons){
+                footballSeason.setVisible();
+            }
         }
+
         catch (JsonSyntaxException e){
             System.out.println("Too many requests.");
         }
