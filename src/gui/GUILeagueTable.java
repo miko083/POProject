@@ -1,8 +1,10 @@
 package gui;
 
 import football.FootballSeason;
+import football.leagueTable.LeagueTable;
 import football.team.NoTeamInListException;
 import football.team.Team;
+import football.team.TeamsInSeason;
 
 import javax.swing.*;
 import javax.swing.table.TableColumn;
@@ -13,16 +15,19 @@ import java.awt.event.MouseListener;
 
 public class GUILeagueTable extends JFrame {
     private JTable table;
-    private FootballSeason season;
-    public GUILeagueTable(String title, FootballSeason season) {
+    private LeagueTable leagueTable;
+    private TeamsInSeason teams;
+    public GUILeagueTable(String title, LeagueTable leagueTable, TeamsInSeason teams) {
 
         super(title);
-        this.season = season;
+
+        this.leagueTable = leagueTable;
+        this.teams = teams;
 
         setBounds(10,10,650,400);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-        GUILeagueTableModel tableModel = new GUILeagueTableModel(season);
+        GUILeagueTableModel tableModel = new GUILeagueTableModel(leagueTable);
         table = new JTable(tableModel);
         table.setAutoCreateRowSorter(true);
         table.getTableHeader().setEnabled(false);
@@ -46,10 +51,10 @@ public class GUILeagueTable extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 2){
                     String name = tableModel.getValueAt(table.getSelectedRow(),2).toString();
-                    Team temp = season.getLeagueTable().getStandings().get(0).getTable().get(table.getSelectedRow()).getTeam();
+                    Team temp = leagueTable.getStandings().get(0).getTable().get(table.getSelectedRow()).getTeam();
                     try {
-                        int temp_int = season.getTeams().getTeam(temp);
-                        temp = season.getTeams().getTeams().get(temp_int);
+                        int temp_int = teams.getTeam(temp);
+                        temp = teams.getTeams().get(temp_int);
                         JOptionPane.showMessageDialog(new JFrame(name), temp.toString());
                     }
                     catch (NoTeamInListException exception){

@@ -1,6 +1,7 @@
 package gui;
 
 import football.FootballSeason;
+import football.scoresTable.ScorersTable;
 
 
 import javax.swing.*;
@@ -12,16 +13,16 @@ import java.awt.event.MouseListener;
 
 public class GUIScorersTable extends JFrame {
     private JTable table;
-    private FootballSeason season;
-    public GUIScorersTable (String title, FootballSeason season) {
+    private ScorersTable scorersTable;
+    public GUIScorersTable (String title, ScorersTable scorersTable) {
 
         super(title);
-        this.season = season;
+        this.scorersTable = scorersTable;
 
         setBounds(10,10,300,230);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-        GUIScorersTableModel tableModel = new GUIScorersTableModel(season);
+        GUIScorersTableModel tableModel = new GUIScorersTableModel(scorersTable);
         table = new JTable(tableModel);
         table.setAutoCreateRowSorter(true);
         table.getTableHeader().setEnabled(false);
@@ -46,7 +47,7 @@ public class GUIScorersTable extends JFrame {
                 if (e.getClickCount() == 2){
                     String name = tableModel.getValueAt(table.getSelectedRow(),2).toString();
                     JOptionPane.showMessageDialog(new JFrame(name),
-                            season.getScorersTable().getScorers().get(table.getSelectedRow()).getPlayer().toString());
+                            scorersTable.getScorers().get(table.getSelectedRow()).getPlayer().toString());
                 }
             }
 

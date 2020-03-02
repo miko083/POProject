@@ -1,20 +1,21 @@
 package gui;
 
 import football.FootballSeason;
+import football.scoresTable.ScorersTable;
 
 import javax.swing.table.*;
 
 
 public class GUIScorersTableModel extends AbstractTableModel{
     private String[] columnNames = {"Number","Name","Goals"};
-    private FootballSeason season;
-    public GUIScorersTableModel (FootballSeason season){
-        this.season = season;
+    private ScorersTable scorersTable;
+    public GUIScorersTableModel (ScorersTable scorersTable){
+        this.scorersTable = scorersTable;
     }
     public int getColumnCount(){
         return columnNames.length;
     }
-    public int getRowCount(){ return season.getScorersTable().getScorers().size();
+    public int getRowCount(){ return scorersTable.getScorers().size();
     }
 
     public Object getValueAt(int row, int col){
@@ -23,10 +24,10 @@ public class GUIScorersTableModel extends AbstractTableModel{
             temp = row + 1;
         }
         else  if (col == 1){
-            temp = season.getScorersTable().getScorers().get(row).getPlayer().getName();
+            temp = scorersTable.getScorers().get(row).getPlayer().getName();
         }
         else if(col == 2){
-            temp = season.getScorersTable().getScorers().get(row).getNumberOfGoals();
+            temp = scorersTable.getScorers().get(row).getNumberOfGoals();
         }
         return temp;
     }
